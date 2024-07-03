@@ -1,7 +1,13 @@
 html {
   scroll-behavior: smooth;
 }
+
 body {
-  background-color: #111;
+  background-color: #262626;
   font-family: sans-serif;
+  color: white;
+}
+
+.div-bg-color {
+  background-color: var(--div-bg-color);
 }

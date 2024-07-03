@@ -10,10 +10,41 @@
   </head>
 
   <body>
-    <button>Añadir Elementos</button>
-    <ul>
+    <button id="button-list">Añadir Elementos</button>
+    <ul id="list">
       <li>Item 1</li>
     </ul>
+
+    <div id="range-container">
+      <label id="label-range">1</label>
+      <input type="range" id="range" min="1" max="6" step="1" value="1" />
+      <button id="button-generate-header">Generar Encabezado</button>
+    </div>
+
+    <h1>Posts</h1>
+    <h2>Post de ejemplo</h2>
+    <!-- Contenedor de posts -->
+    <div id="posts-container">
+      <!-- Post independiente -->
+      <div>
+        <span>Author: Dorian</span>
+        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit.</p>
+      </div>
+      <!-- Fin del post independiente -->
+    </div>
+    <!-- Fin del contenedor de posts -->
+
+    <form>
+      <div>
+        <label>Author</label>
+        <input id="input-author" type="text" />
+      </div>
+      <div>
+        <label>Message:</label>
+        <textarea id="textarea-message"></textarea>
+      </div>
+      <button id="button-send-post">Send Post</button>
+    </form>
     <script type="module" src="./js/index.js"></script>
   </body>
 </html>
