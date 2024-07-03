@@ -154,11 +154,11 @@ createButtons();
 
 const generate25RandomNumbers = () => {
   const randomNumbers = [];
+
   for (let i = 0; i < 25; i++) {
-    const randomNumber = Math.floor(Math.random() * 50);
+    const randomNumber = Math.floor(Math.random() * 100);
     randomNumbers.push(randomNumber);
   }
-
   return randomNumbers;
 };
 
@@ -168,26 +168,20 @@ const generate25RandomNumbers = () => {
 
 /* - Crea una función que reciba los 25 números aleatorios que has creado en el ejercicio anterior y genere e inserte en el DOM 2 listas, una con números pares y otra con números impares. */
 
-const evenOddLists = () => {
-  const fragment = document.createDocumentFragment();
+const evensOddsLists = () => {
   const oddList = document.createElement('ul');
   const evenList = document.createElement('ul');
+
   const numbers = generate25RandomNumbers();
 
-  for (const number of numbers) {
-    const newLi = document.createElement('li');
-    newLi.textContent = number;
-    if (number % 2 === 0) {
-      evenList.append(newLi);
-    } else {
-      oddList.append(newLi);
-    }
-  }
-
-  fragment.append(evenList, oddList);
-
-  document.body.append(fragment);
+  console.log(numbers);
 };
+
+evensOddsLists();
+
+//
+//
+//
 
 /* - Con esta estructura, crea una función que, a medida que vayas escribiendo, te ponga dentro de la lista:
   - El texto tiene X caracteres.
@@ -225,4 +219,25 @@ const evenOddLists = () => {
 //   const fragment = document.createDocumentFragment();
 
 //   const newLiCharacters =
+// };
+
+// const evenOddLists = () => {
+//   const fragment = document.createDocumentFragment();
+//   const oddList = document.createElement('ul');
+//   const evenList = document.createElement('ul');
+//   const numbers = generate25RandomNumbers();
+
+//   for (const number of numbers) {
+//     const newLi = document.createElement('li');
+//     newLi.textContent = number;
+//     if (number % 2 === 0) {
+//       evenList.append(newLi);
+//     } else {
+//       oddList.append(newLi);
+//     }
+//   }
+
+//   fragment.append(evenList, oddList);
+
+//   document.body.append(fragment);
 // };
