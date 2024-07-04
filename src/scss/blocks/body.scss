@@ -3,11 +3,24 @@ html {
 }
 
 body {
-  background-color: #262626;
+  background-color: #3e3e3e;
   font-family: sans-serif;
   color: white;
 }
 
 .div-bg-color {
   background-color: var(--div-bg-color);
+}
+
+.container-div {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 16px;
+}
+
+.user-div {
+  max-width: 400px;
+  padding: 16px;
+  background-color: rgb(0, 0, 0);
+  border-radius: 8px;
 }

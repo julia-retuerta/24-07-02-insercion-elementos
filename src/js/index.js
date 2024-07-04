@@ -169,12 +169,26 @@ const generate25RandomNumbers = () => {
 /* - Crea una función que reciba los 25 números aleatorios que has creado en el ejercicio anterior y genere e inserte en el DOM 2 listas, una con números pares y otra con números impares. */
 
 const evensOddsLists = () => {
-  const oddList = document.createElement('ul');
+  const fragment = document.createDocumentFragment();
+
   const evenList = document.createElement('ul');
+  const oddList = document.createElement('ul');
 
   const numbers = generate25RandomNumbers();
 
-  console.log(numbers);
+  for (const number of numbers) {
+    const newLi = document.createElement('li');
+    newLi.textContent = number;
+    if (number % 2 === 0) {
+      evenList.append(newLi);
+    } else {
+      oddList.append(newLi);
+    }
+  }
+
+  fragment.append(evenList, oddList);
+
+  document.body.append(fragment);
 };
 
 evensOddsLists();
@@ -187,14 +201,65 @@ evensOddsLists();
   - El texto tiene X caracteres.
   - El texto tiene X vocales.
   - El texto tiene X consonantes.
-  - Has introducido X espacios
+  - Has introducido X espacios */
 
-```html
-<div>
-  <input type="text" />
-  <ul></ul>
-</div>
-``` */
+const inputTextElement = document.getElementById('input-text');
+const textListElement = document.getElementById('text-list');
+
+// const characters = 'AÁBCDEÉFGHIÍJKLMNOÓPQRSTUÚVWXYZaábcdeéfghiíjklmnoópqrstuúvwxyz0123456789!@#$%^&*()_+-={}[]:;<>,.?/';
+const vowels = 'aeiouAEIOUáéíóúÁÉÍÓÚ';
+const consonants = 'bcdfghjklmnñpqrstvwxyzBCDFGHJKLMNÑPQRSTVWXYZ';
+// const space = ' ';
+
+const textInfo = () => {
+  const fragment = document.createDocumentFragment();
+
+  const value = inputTextElement.value;
+  const numberOfCharacters = value.length;
+  let numberOfVowels = 0;
+  let numberOfConsonants = 0;
+  let numberOfSpaces = 0;
+
+  for (const letter of value) {
+    if (vowels.includes(letter)) {
+      numberOfVowels++;
+    } else if (consonants.includes(letter)) {
+      numberOfConsonants++;
+    } else {
+      numberOfSpaces++;
+    }
+  }
+
+  const charactersText = document.createElement('li');
+  charactersText.textContent = `El texto tiene ${numberOfCharacters} caracteres`;
+
+  const vowelsText = document.createElement('li');
+  vowelsText.textContent = `El texto tiene ${numberOfVowels} vocales`;
+
+  const consonantsText = document.createElement('li');
+  consonantsText.textContent = `El texto tiene ${numberOfConsonants} consonantes`;
+
+  const spacesText = document.createElement('li');
+  spacesText.textContent = `Has introducido ${numberOfSpaces} espacios`;
+
+  fragment.append(charactersText, vowelsText, consonantsText, spacesText);
+
+  textListElement.innerHTML = '';
+  textListElement.append(fragment);
+};
+
+inputTextElement.addEventListener('input', textInfo);
+
+//
+//
+//
+
+/* - Con este HTML consigue que al introducir un número POSITIVO y MAYOR de 0 se genere la tabla de multiplicar de ese número del 0 al 10 como elementos de la lista. En el caso de que el número no sea correcto o no haya número, el botón estará desactivado.
+ */
+
+//
+//
+//
 
 // const listOneElement = document.getElementById('list-one');
 // const inputTextElement = document.getElementById('input-text');
@@ -221,23 +286,124 @@ evensOddsLists();
 //   const newLiCharacters =
 // };
 
-// const evenOddLists = () => {
-//   const fragment = document.createDocumentFragment();
-//   const oddList = document.createElement('ul');
-//   const evenList = document.createElement('ul');
-//   const numbers = generate25RandomNumbers();
+const inputNumberElement = document.getElementById('input-number');
+const buttonMultiplicationTableElement = document.getElementById('button-multiplication-table');
+const multiplicationTableElement = document.getElementById('multiplication-table');
 
-//   for (const number of numbers) {
-//     const newLi = document.createElement('li');
-//     newLi.textContent = number;
-//     if (number % 2 === 0) {
-//       evenList.append(newLi);
-//     } else {
-//       oddList.append(newLi);
-//     }
-//   }
+const validNumber = () => {
+  // if (inputNumberElement.value > 0) {
+  //   buttonMultiplicationTableElement.disabled = false;
+  // } else {
+  //   buttonMultiplicationTableElement.disabled = true;
+  // }
 
-//   fragment.append(evenList, oddList);
+  // Opción corta:
+  buttonMultiplicationTableElement.disabled = !(inputNumberElement.value > 0);
+};
 
-//   document.body.append(fragment);
-// };
+inputNumberElement.addEventListener('input', validNumber);
+
+const generateMultiplicationTable = () => {
+  const fragment = document.createDocumentFragment();
+
+  for (let i = 0; i <= 10; i++) {
+    const value = inputNumberElement.value;
+    const result = value * i;
+    const newLi = document.createElement('li');
+    newLi.textContent = `${value} x ${i} = ${result}`;
+    fragment.append(newLi);
+  }
+
+  multiplicationTableElement.textContent = '';
+  multiplicationTableElement.append(fragment);
+};
+
+buttonMultiplicationTableElement.addEventListener('click', generateMultiplicationTable);
+
+//
+//
+//
+
+/* - Con este objeto debes crear tarjetas de usuario que muestren todos los datos, el diseño es libre, lo importante es que muestren toda la información del usuario y la imagen de perfil. Crea una función que genere todas las tarjetas de usuario y las inserte en el DOM. */
+
+const USERS = [
+  {
+    name: 'Josep Flores',
+    age: 77,
+    username: 'Josep85',
+    email: 'Josep_Flores@hotmail.com',
+    profileImage: 'https://randomuser.me/api/portraits/women/24.jpg'
+  },
+  {
+    name: 'Ricardo Rosas',
+    age: 43,
+    username: 'Ricardo_Rosas',
+    email: 'Ricardo_Rosas22@yahoo.com',
+    profileImage: 'https://randomuser.me/api/portraits/men/57.jpg'
+  },
+  {
+    name: 'Iván Tamayo',
+    age: 40,
+    username: 'tamayo87',
+    email: 'Ivan_Tamayo61@yahoo.com',
+    profileImage: 'https://randomuser.me/api/portraits/men/9.jpg',
+    job: 'Lead Communications Designer'
+  },
+  {
+    name: 'Maica Villanueva',
+    age: 64,
+    username: 'Maica.Villanueva18',
+    email: 'Maica.Villanueva1@yahoo.com',
+    profileImage: 'https://randomuser.me/api/portraits/women/4.jpg'
+  },
+  {
+    name: 'Pedro Estrada',
+    age: 77,
+    username: 'Pedro29',
+    email: 'Pedro_Estrada22@hotmail.com',
+    profileImage: 'https://randomuser.me/api/portraits/men/2.jpg',
+    job: 'Central Directives Liaison'
+  },
+  {
+    name: 'Jorge Cedillo',
+    age: 33,
+    username: 'Jorge_Cedillo',
+    email: 'Jorge.Cedillo2@yahoo.com',
+    profileImage: 'https://randomuser.me/api/portraits/men/88.jpg'
+  }
+];
+
+const generateUserCards = () => {
+  const fragment = document.createDocumentFragment();
+
+  const containerDiv = document.createElement('div');
+  containerDiv.classList.add('container-div');
+
+  USERS.forEach(user => {
+    const userDiv = document.createElement('div');
+    userDiv.classList.add('user-div');
+
+    const name = document.createElement('span');
+    name.textContent = `Name: ${user.name}`;
+
+    const age = document.createElement('span');
+    age.textContent = `Age: ${user.age}`;
+
+    const username = document.createElement('span');
+    username.textContent = `Username: ${user.username}`;
+
+    const email = document.createElement('span');
+    email.textContent = `Email: ${user.email}`;
+
+    const profileImage = document.createElement('img');
+    profileImage.src = user.profileImage;
+
+    userDiv.append(name, age, username, email, profileImage);
+    containerDiv.append(userDiv);
+  });
+
+  fragment.append(containerDiv);
+  document.body.append(fragment);
+};
+
+generateUserCards();
